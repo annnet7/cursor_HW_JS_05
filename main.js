@@ -85,10 +85,10 @@ console.log("стало: " +
 //Task 10 A function accepts array of users and returns object of users where key is user id and value user data.
 console.log("Task10");
 const users = [
-    { id: 1, name: 'John', birthday: '1999-2-12' },
+    { id: 1, name: 'John', birthday: '2001-2-12' },
     { id: 2, name: 'Bill', birthday: '1999-1-19' },
-    { id: 3, name: 'Carol', birthday: '1999-3-11' },
-    { id: 4, name: 'Luce', birthday: '1999-2-22' }
+    { id: 3, name: 'Carol', birthday: '2003-3-11' },
+    { id: 4, name: 'Luce', birthday: '2001-12-22' }
 ];
 
 function usersToObject(users) {
@@ -128,7 +128,34 @@ console.log(filterUsersByMonth(users, 1)); // [{ name: 'Bill', birthday: '1999-1
 //Task 12
 //A function returns name and age of users separated by comma that are older than 18.
 function getAdultNames(users) {
-    console.log("adults");
+    //console.log("adults");
+    let birthstring = "1990-03-21";
+    // функция для определения возраста
+    function getAge(birth) {
+        let today = new Date();
+        let actualDate = [today.getFullYear(), today.getMonth(), today.getDate()];
+        let birthDayString = birth.split("-");
+        let birthDay = birthDayString.map(function(currentValue) { return Number(currentValue) });
+
+
+        let years = actualDate[0] - birthDay[0];
+        //год подходит, но месяц или день не наступил:
+        if (actualDate[1] < birthDay[1]) years--;
+        else {
+            if ((actualDate[2] == birthDay[2]) && (actualDate[1] == birthDay[1])) years--;
+        }
+        return years;
+    }
+    //console.log(getAge(birthstring));
+    let adults = "";
+    users.map(function(currentValue, index) {
+        let dateOfBirth = currentValue["birthday"];
+
+        let age = getAge(dateOfBirth);
+        if (age >= 18) adults += currentValue["name"] + " - " + age + " years, ";
+    });
+    console.log(adults);
+    //console.log(birthDay);
 }
 getAdultNames(users) // 'John 19, Luce 18'
 
