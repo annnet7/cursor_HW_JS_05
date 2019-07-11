@@ -49,17 +49,20 @@ let checkArray = [1, 4, 8, 2, 20, 5, 1]; // { max: 20, min: 1 }
 
 console.log(checkArray);
 console.log(minMax(checkArray));
-
 //Task 8 A function that returns average of numbers in array.
+//ИСПРАВИЛА!!!
 console.log("Task8");
 
 function average(arr) {
-    let sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
-    let length = arr.reduce((accumulator) => accumulator + 1);
+    let length = 1;
+    let sum = arr.reduce(function(accumulator, currentValue) {
+        length++;
+        return accumulator + currentValue
+    });
     return Math.round(100 * (sum / length)) / 100;
 
 }
-console.log("Average num is - " + average([1, 4, 2])); // 2.33
+console.log("Average num is - " + average([5, 4, 1, 3])); // 3.25
 
 //Task 9 A function which concats all first-nested arrays in one array (use reduce):
 console.log("Task9");
@@ -82,7 +85,7 @@ console.log("стало: " +
     concatFirstNestedArrays(checkArray2));
 
 
-//Task 10 A function accepts array of users and returns object of users where key is user id and value user data.
+//Task 10 A function accepts array of users and returns object of users where key is user id and value user data. || ИСПРАВИЛА
 console.log("Task10");
 const users = [
     { id: 1, name: 'John', birthday: '2001-2-12' },
@@ -94,7 +97,7 @@ const users = [
 function usersToObject(users) {
     let UsersObj = {};
     users.forEach(function(item) {
-        UsersObj["" + item["id"]] = item["name"] + " " + item["birthday"]
+        UsersObj["" + item["id"]] = item;
     });
     return UsersObj;
 }
