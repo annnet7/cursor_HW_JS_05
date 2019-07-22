@@ -14,7 +14,7 @@ console.log(`sum n=${checkNum*2} - ` + sumAll(checkNum * 2)); // 10
 console.log("Task4");
 //A function which returns factorial of number using recursion.
 function factorial(n) {
-    if (n == 1) return 1;
+    if (n == 1 || n == 0) return 1; // добавила если n=0;
     else return factorial(n - 1) * n;
 }
 checkNum = 3;
@@ -33,7 +33,14 @@ function filterNumbers(arr, maxNumber) {
     return newArr;
 }
 console.log(filterNumbers([1, 4, 8, 1, 20], 5)); // [1, 4, 1]
+// Task 6 with array method:
+console.log("Task6_2 array method");
 
+function filterNumbers2(arr, maxNumber) {
+    let newArr = arr.filter((item) => (item <= maxNumber));
+    return newArr;
+}
+console.log(filterNumbers2([1, 4, 8, 1, 20, 5], 5)); // [1, 4, 1]
 //Task 7 A function that returns object with min and max numbers from array of numbers.
 console.log("Task7");
 
@@ -60,9 +67,19 @@ function average(arr) {
         return accumulator + currentValue
     });
     return Math.round(100 * (sum / length)) / 100;
-
+    //почему считала длину, потому что есть возвожность создать пустые элементы, которые не хранят значений и потому буде не корректный результат.
 }
 console.log("Average num is - " + average([5, 4, 1, 3])); // 3.25
+
+//правки
+function average2(arr) {
+
+    let sum = arr.reduce(function(accumulator, currentValue) {
+        return accumulator + currentValue
+    });
+    return (sum / arr.length).toFixed(2);
+}
+console.log("Average num is - " + average2([5, 4, 1, 3])); // 3.25
 
 //Task 9 A function which concats all first-nested arrays in one array (use reduce):
 console.log("Task9");
